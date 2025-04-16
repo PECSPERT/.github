@@ -1,0 +1,21 @@
+name: Verify No Merge Commits
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check-merge-commits:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate No Merge Commits
+        uses: NexusPHP/no-merge-commits@v2.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
